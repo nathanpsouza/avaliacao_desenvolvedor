@@ -184,6 +184,10 @@ GEM
       rails-assets-jquery (>= 1.9.1, < 3)
     rails-assets-font-awsome (4.6.3)
     rails-assets-jquery (2.2.4)
+    rails-controller-testing (0.1.1)
+      actionpack (~> 5.x)
+      actionview (~> 5.x)
+      activesupport (~> 5.x)
     rails-dom-testing (2.0.1)
       activesupport (>= 4.2.0, < 6.0)
       nokogiri (~> 1.6.0)
@@ -300,6 +304,7 @@ DEPENDENCIES
   rails (~> 5.0.0)
   rails-assets-bootstrap!
   rails-assets-font-awsome!
+  rails-controller-testing
   rspec-rails
   sass-rails (~> 5.0)
   shoulda-matchers

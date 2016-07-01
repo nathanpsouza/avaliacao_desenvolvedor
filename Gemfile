@@ -70,6 +70,7 @@ group :test do
   gem 'launchy'
   gem 'shoulda-matchers', require: false
   gem 'simplecov', :require => false
+  gem 'rails-controller-testing'
 end
 
 source 'https://rails-assets.org' do

@@ -50,11 +50,15 @@ module Importer
     end
 
     def import
-      ActiveRecord::Base.transaction do
-        get_rows.each do |record|
-          order = Order.create(record)
-          raise Exception.new("Invalid record") unless order.persisted?
+      if valid?
+        ActiveRecord::Base.transaction do
+          get_rows.each do |record|
+            order = Order.create(record)
+            raise Exception.new("Invalid record") unless order.persisted?
+          end
         end
+      else
+        raise Exception.new("Invalid file")
       end
     end
   end

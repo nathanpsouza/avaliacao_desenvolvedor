@@ -1,5 +1,27 @@
 class OrdersController < ApplicationController
   def index
-    @orders = Order.all
+    @orders = Order.page(params[:page])
+    @import_file = ImportFile.new
+  end
+
+  def show
+    @order = Order.find(params[:id])
+  end
+
+  def import
+    @imported_file = ImportFile.new(params.fetch(:import_file, {}).permit(:file))
+
+    if @imported_file.save
+      begin
+        importer = Importer::Base.new(@imported_file.file.path)
+        importer.import
+      rescue Exception => ex
+        flash[:error] = "Arquivo em formato inválido"    
+      end
+    else
+      flash[:error] = "Arquivo em formato inválido"    
+    end
+
+    redirect_to root_path
   end
 end

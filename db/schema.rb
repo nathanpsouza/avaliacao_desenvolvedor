@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160701212241) do
+ActiveRecord::Schema.define(version: 20160704141959) do
+
+  create_table "import_files", force: :cascade do |t|
+    t.string   "file",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "orders", force: :cascade do |t|
     t.string   "customer_name",                         null: false

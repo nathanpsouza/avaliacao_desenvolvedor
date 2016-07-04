@@ -11,5 +11,7 @@
 class ImportFile < ApplicationRecord
   validates :file, presence: true
 
-  mount_uploader :file, ImportFileUploader
+  mount_uploader :file, ::ImportFileUploader
+
+  has_many :orders
 end

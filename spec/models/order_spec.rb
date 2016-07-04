@@ -8,5 +8,10 @@ RSpec.describe Order, type: :model do
     it { is_expected.to validate_numericality_of(:value) }
     it { is_expected.to validate_presence_of(:quantity) }
     it { is_expected.to validate_numericality_of(:quantity) }
+    it { is_expected.to validate_presence_of(:import_file) }
+  end
+
+  context 'relations' do
+    it { is_expected.to belong_to :import_file }
   end
 end

@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   def index
     @orders = Order.page(params[:page])
     @import_file = ImportFile.new
+    @import_files = ImportFile.all
   end
 
   def show
@@ -13,7 +14,7 @@ class OrdersController < ApplicationController
 
     if @imported_file.save
       begin
-        importer = Importer::Base.new(@imported_file.file.path)
+        importer = Importer::Base.new(@imported_file)
         importer.import
       rescue Exception => ex
         flash[:error] = "Arquivo em formato inválido"    

@@ -6,11 +6,12 @@ module Importer
     let(:blank_path) { File.join(Rails.root, 'spec', 'support', 'order', 'blank.txt') }
     let(:no_header_path) { File.join(Rails.root, 'spec', 'support', 'order', 'no_header.txt') }
     
-    let(:importer) { Base.new(path) }
+    let(:importer) { Base.new(imported_file) }
+    let(:imported_file) { FactoryGirl.create(:import_file) }
 
     describe '.initialize' do
       it 'instantiate @path with file path' do
-        expect(importer.path).to eq(path)
+        expect(importer.path).to eq(imported_file.file.path)
       end
     end
 
@@ -20,12 +21,12 @@ module Importer
       end
       
       it 'is invalid without header' do
-        no_header = Base.new(no_header_path)
+        no_header = Base.new(FactoryGirl.create(:import_file, file: File.new(no_header_path)))
         expect(no_header.valid?).to eq(false)
       end
 
       it 'is invalid with blank file' do
-        blank = Base.new(blank_path)
+        blank = Base.new(FactoryGirl.create(:import_file, file: File.new(blank_path)))
         expect(blank.valid?).to eq(false)
       end
     end
@@ -64,7 +65,7 @@ module Importer
       end
 
       it 'raise exception with invalid files' do
-        importer = Base.new(invalid)
+        importer = (FactoryGirl.create(:import_file, file: File.new(invalid)))
         expect {
           importer.import
         }.to raise_error Exception

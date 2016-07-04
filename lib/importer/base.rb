@@ -2,8 +2,9 @@ module Importer
   class Base
     attr_accessor :path
 
-    def initialize path      
-      @path = path
+    def initialize imported_file     
+      @imported_file = imported_file 
+      @path = imported_file.file.path
     end
 
     def get_header
@@ -53,7 +54,7 @@ module Importer
       if valid?
         ActiveRecord::Base.transaction do
           get_rows.each do |record|
-            order = Order.create(record)
+            order = Order.create(record.merge(import_file: @imported_file))
             raise Exception.new("Invalid record") unless order.persisted?
           end
         end

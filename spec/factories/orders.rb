@@ -6,5 +6,6 @@ FactoryGirl.define do
     quantity { [*1..10].sample }
     address { Faker::Address.street_address }
     provider { Faker::Company.name }
+    import_file
   end
 end

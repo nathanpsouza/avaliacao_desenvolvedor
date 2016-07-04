@@ -14,6 +14,7 @@
           = f.input :file
           = f.submit "Importar", class: 'btn btn-primary'        
 
+%h2 Pedidos
 %table.table
   %thead
     %tr
@@ -29,3 +30,18 @@
     - else
       = render @orders
 = paginate @orders
+
+%h2 Importações
+%table.table
+  %thead
+    %tr
+      %th Nome do arquivo
+      %th Valor total dos pedidos
+      %th Registros importados
+      %th Criado em
+  %tbody
+    - if @import_files.empty?
+      %tr
+        %td(colspan="4") Ainda não há importações de arquivos.
+    - else
+      = render partial: 'orders/import_file', collection: @import_files

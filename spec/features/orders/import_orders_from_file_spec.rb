@@ -29,4 +29,15 @@ feature 'import orders from file' do
     
     expect(page).to have_content('Arquivo em formato inválido')
   end
+
+  scenario 'see a list of imported files with sum of values' do
+    import_file = FactoryGirl.create(:import_file)
+    importer = Importer::Base.new(import_file)
+    importer.import
+
+    visit root_path
+
+    expect(find("#import_file_#{import_file.id}")).to have_text("R$ 30,00")
+    expect(find("#import_file_#{import_file.id}")).to have_text(import_file.file.filename)
+  end
 end

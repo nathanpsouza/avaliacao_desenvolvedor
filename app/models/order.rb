@@ -21,5 +21,5 @@ class Order < ApplicationRecord
   validates :quantity, presence: true, numericality: true
   validates :import_file, presence: true
 
-  belongs_to :import_file
+  belongs_to :import_file, counter_cache: :order_count
 end

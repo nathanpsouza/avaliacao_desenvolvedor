@@ -12,6 +12,6 @@ RSpec.describe Order, type: :model do
   end
 
   context 'relations' do
-    it { is_expected.to belong_to :import_file }
+    it { is_expected.to belong_to(:import_file).counter_cache(:order_count) }
   end
 end

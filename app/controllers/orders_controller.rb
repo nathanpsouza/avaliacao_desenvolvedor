@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   def index
     @orders = Order.page(params[:page])
     @import_file = ImportFile.new
-    @import_files = ImportFile.all
+    @import_files = ImportFile.includes(:orders).all
   end
 
   def show

@@ -14,4 +14,8 @@ class ImportFile < ApplicationRecord
   mount_uploader :file, ::ImportFileUploader
 
   has_many :orders
+
+  def total
+    orders.pluck(:value).sum
+  end
 end
